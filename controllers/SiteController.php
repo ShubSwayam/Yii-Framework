@@ -135,28 +135,39 @@ class SiteController extends Controller
         $posts = new Posts();
         $formData = Yii::$app->request->post();
         if ($posts->load($formData)) {
-            if($posts->save()){
+            if ($posts->save()) {
                 Yii::$app->getSession()->setFlash('message', 'Post Published Successfully');
                 return $this->redirect(['index']);
-            }else{
+            } else {
                 Yii::$app->getSession()->setFlash('message', 'Having Somthing Error');
             }
         }
         return $this->render('create', ['posts' => $posts]);
     }
 
-    public function actionView($prid){
+    public function actionView($prid)
+    {
         $post = Posts::findOne($prid);
-        return $this->render('view',['post'=>$post]);
+        return $this->render('view', ['post' => $post]);
     }
 
-    public function actionUpdate($prid){
+    public function actionUpdate($prid)
+    {
         $post = Posts::findOne($prid);
-        if($post->load(Yii::$app->request->post()) && $post->save()){
-            Yii::$app->getSession()->setFlash('message','Post Updated Successfully');
-            return $this->redirect(['index','prid' => $post->prid]);
-        }else{
-            return $this->render('update',['post'=> $post]);
+        if ($post->load(Yii::$app->request->post()) && $post->save()) {
+            Yii::$app->getSession()->setFlash('message', 'Post Updated Successfully');
+            return $this->redirect(['index', 'prid' => $post->prid]);
+        } else {
+            return $this->render('update', ['post' => $post]);
+        }
+    }
+
+    public function actionDelete($prid)
+    {
+        $post = Posts::findOne($prid)->delete();
+        if ($post) {
+            Yii::$app->getSession()->setFlash('message', 'Post Deleted Successfully');
+            return $this->redirect(['index']);
         }
     }
 }

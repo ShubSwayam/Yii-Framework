@@ -31,7 +31,7 @@ $this->title = 'My Yii First Application';
         <div class="row">
             <div class="form-group">
                 <div class="col-lg-6">
-                    <?php $items = ['Framework' => 'Framework', 'Language' => 'Language', 'Library' => 'Library', 'ORM' => 'ORM']; ?>
+                    <?php $items = ['Framework' => 'Framework', 'Language' => 'Language', 'Library' => 'Library', 'Runtime' => 'Runtime']; ?>
                     <?= $form->field($posts, 'category')->dropDownList($items, ['prompt' => 'Select']); ?>
                 </div>
             </div>
